@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Matt Lynn">
+    <title>Unit 5 Assignment</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+</head>
+<body>
+    <header>
+        <img src="images/Aperture-Science-Logo.jpg" alt="Aperture Science Logo" width="75">
+
+    <div>
+        <h1>Cake Order Retrieval</h1>
+        <p class="subtitle">Aperture Science</p>
+    </div>
+</header>
+
+    <section>
+        <h2>Single Record</h2>
+        <label for="userID">Participant ID:</label>
+        <input type="number" id="userID" placeholder="123">
+        <button onclick="getByUserID()">GO</button>
+        <div id="userIdData"></div>
+    </section>
+
+    <section>
+        <h2>Multiple Records</h2>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" placeholder="name">
+        <button onclick="getByLastName()">GO</button>
+        <div id="lastNameData"></div>
+    </section>
+
+    <section>
+        <h2>Multiple Selection</h2>
+        <label for="colorSelect">Cake Color:</label>
+        <select id="colorSelect">
+            <option value="White">White</option>
+            <option value="Chocolate">Chocolate</option>
+            <option value="Neurotoxin Green">Neurotoxin Green</option>
+        </select>
+
+        <label for="fillingSelect">Filling:</label>
+        <select id="fillingSelect">
+            <option value="Gel">Gel</option>
+            <option value="Asbestos">Asbestos</option>
+            <option value="Schodringer's Choice">Schodringer's Choice</option>
+        </select>
+
+
+        <button onclick="getFilteredRecords()">Go Fish</button>
+        <div id="filteredData"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

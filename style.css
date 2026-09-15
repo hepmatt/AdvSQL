@@ -1,0 +1,176 @@
+
+
+/* overall page background */
+body {
+    background-color: #0a0e0a;
+    color: #33ff66;
+    font-family: 'Consolas', 'Courier New', monospace;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+    position: relative;
+    text-align: left;
+}
+
+/* makes it look like an old terminal */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(51, 255, 102, 0.03) 0px,
+        rgba(51, 255, 102, 0.03) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* top banner*/
+header {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: left;
+    gap: 20px;
+    border-bottom: 1px dashed #33ff66;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+/* cool effects to the logo*/
+header img {
+    filter: grayscale(1) brightness(1.4) sepia(1) hue-rotate(60deg) saturate(3);
+}
+
+/* main page title styling */
+header h1 {
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* subtitle line "aperature science */
+header .subtitle {
+    margin: 6px 0 0 0;
+    font-size: 0.8em;
+    color: #1f9944;
+}
+
+/* adds a "> " prompt character before the subtitle text automatically */
+header .subtitle::before {
+    content: "> ";
+}
+
+/* spacing for each query section */
+section {
+    padding: 18px 20px;
+    margin-bottom: 22px;
+}
+
+/* section headers */
+h2 {
+    font-size: 0.95em;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    text-transform: uppercase;
+}
+
+/* auto-adds "=== " before every h2's text */
+h2::before {
+    content: "=== ";
+}
+
+/* auto-adds " ===" after every h2's text */
+h2::after {
+    content: " ===";
+}
+
+/* field labels (Participant ID, Last Name, etc.) */
+label {
+    display: block;
+    margin-top: 12px;
+    font-size: 0.9em;
+    color: #1f9944;
+}
+
+/* auto-adds a "> " prompt character before every label's text */
+label::before {
+    content: "> ";
+}
+
+/* text inputs and dropdowns */
+input,
+select {
+    width: 100%;
+    max-width: 260px;
+    padding: 8px 10px;
+    margin-top: 5px;
+    background-color: #0a0e0a;
+    border: 1px solid #1f9944;
+    color: #33ff66;
+    font-family: 'Consolas', 'Courier New', monospace;
+    text-align: left;
+}
+
+/* glow effect on selected input box */
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #33ff66;
+    box-shadow: 0 0 4px #33ff66;
+}
+
+/* all buttons */
+button {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 9px 18px;
+    background-color: #0a0e0a;
+    border: 1px solid #33ff66;
+    color: #33ff66;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* auto-adds "[ " before every button's text */
+button::before {
+    content: "[ ";
+}
+
+/* auto-adds " ]" after every button's text */
+button::after {
+    content: " ]";
+}
+
+/* button color swap on hover */
+button:hover {
+    background-color: #33ff66;
+    color: #0a0e0a;
+}
+
+/* the five output boxes where query results get typed in */
+#singleData,
+#multipleData,
+#lastNameData,
+#userIdData,
+#filteredData {
+    background-color: #000;
+    border: 1px dashed #1f9944;
+    color: #33ff66;
+    font-size: 0.85em;
+    padding: 12px;
+    margin-top: 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 1.2em;
+}
