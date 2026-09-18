@@ -120,6 +120,38 @@ select {
     text-align: left;
 }
 
+/* checkboxes and radio buttons need their own sizing, not the text-input rules above */
+input[type="checkbox"],
+input[type="radio"] {
+    width: auto;
+    max-width: none;
+    padding: 0;
+    margin: 0 8px 0 0;
+    accent-color: #33ff66;
+}
+
+/*formatting used in unit 3 order form, makes the radio and checkbox rows align properly */
+.checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #33ff66;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+legend {
+    padding: 0 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
 /* glow effect on selected input box */
 input:focus,
 select:focus {
@@ -156,6 +188,21 @@ button::after {
 button:hover {
     background-color: #33ff66;
     color: #0a0e0a;
+}
+
+/*New Cake order link*/
+a {
+    color: #33ff66;
+    text-decoration: none;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+a::before {
+    content: "> ";
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 /* the five output boxes where query results get typed in */
