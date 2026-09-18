@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Cake Order</title>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="images/Aperture-Science-Logo.jpg" alt="Aperture Science Logo" width="100">
+        <div>
+            <h1>New Cake Order</h1>
+            <p class="subtitle">Aperture Science</p>
+        </div>
+    </header>
+
+    <section>
+        <h2>Order Details</h2>
+        <form id="orderForm">
+
+            <label for="userID">Participant User ID:</label>
+            <input type="number" id="userID" required>
+
+            <label for="orderID">Order ID:</label>
+            <!--<p id="nextOrderIdHint" class="iq-note"></p>-->
+            <input type="number" id="orderID" readonly required>
+
+            <label for="cakeSize">Cake Size:</label>
+            <input type="text" id="cakeSize" placeholder="Small, Medium, Large" required>
+
+            <label for="cakeColor">Cake Color:</label>
+            <select id="cakeColor">
+                <option value="White">White</option>
+                <option value="Chocolate">Chocolate</option>
+                <option value="Neurotoxin Green">Neurotoxin Green</option>
+            </select>
+
+            <fieldset>
+                <legend>Filling (choose one):</legend>
+
+                <div class="checkbox-row">
+                    <input type="radio" id="fillingSchodringersChoice" name="filling" value="Schodringer's Choice" required>
+                    <label for="fillingSchodringersChoice">Schodringer's Choice</label>
+                </div>
+
+                <div class="checkbox-row">
+                    <input type="radio" id="fillingAsbestos" name="filling" value="Asbestos" required>
+                    <label for="fillingAsbestos">Asbestos</label>
+                </div>
+
+                <div class="checkbox-row">
+                    <input type="radio" id="fillingGel" name="filling" value="Gel" required>
+                    <label for="fillingGel">Gel</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Toppings (choose any):</legend>
+
+                <div class="checkbox-row">
+                    <input type="checkbox" id="toppingSprinkles" name="toppings" value="Sprinkles">
+                    <label for="toppingSprinkles">Sprinkles</label>
+                </div>
+
+                <div class="checkbox-row">
+                    <input type="checkbox" id="toppingCandle_Cherries" name="toppings" value="Cherries">
+                    <label for="toppingCandle_Cherries">Candle & Cherries</label>
+                </div>
+
+                <div class="checkbox-row">
+                    <input type="checkbox" id="toppingTurret" name="toppings" value="Turret Shavings">
+                    <label for="toppingTurret">Turret Shavings</label>
+                </div>
+            </fieldset>
+
+            <label for="candleValue">Number of Candles:</label>
+            <input type="number" id="candleValue" value="0">
+
+            <label for="cakeSliced">Sliced:</label>
+            <input type="checkbox" id="cakeSliced">
+
+            <label for="sliceShape">Slice Shape:</label>
+            <input type="text" id="sliceShape" placeholder="Square, Triangular, Blended">
+
+            <label for="addNotes">Additional Notes:</label>
+            <input type="text" id="addNotes" maxlength="250">
+            <span id="notesCounter" class="iq-note">0/250</span>
+
+            <button type="submit">Submit Order</button>
+        </form>
+        <div id="insertResult"></div>
+    </section>
+
+    <p><a href="index.html">Back to Query Terminal</a></p>
+
+    <script src="addOrder.js"></script>
+</body>
+</html>
