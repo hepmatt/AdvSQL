@@ -20,22 +20,25 @@
 </header>
 
     <section>
+        <button onclick="window.location.href='addOrder.html'">+ New Cake Order</button>
+        <p></p>
         <h2>Single Record</h2>
         <label for="userID">Participant ID:</label>
-        <input type="number" id="userID" placeholder="123">
+        <input type="number" id="userID" placeholder="ex. 101">
         <button onclick="getByUserID()">GO</button>
         <div id="userIdData"></div>
     </section>
 
     <section>
         <h2>Multiple Records</h2>
+
         <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" placeholder="name">
+        <input type="text" id="lastName" placeholder="ex. Gladis">
         <button onclick="getByLastName()">GO</button>
         <div id="lastNameData"></div>
     </section>
 
-    <section>
+    <!--<section>
         <h2>Multiple Selection</h2>
         <label for="colorSelect">Cake Color:</label>
         <select id="colorSelect">
@@ -49,11 +52,54 @@
             <option value="Gel">Gel</option>
             <option value="Asbestos">Asbestos</option>
             <option value="Schodringer's Choice">Schodringer's Choice</option>
+        </select>-->
+
+        <section>
+        <h2>All Cake Orders</h2>
+         <button onclick="getAllOrders()">Show All Orders</button>
+         <div id="allOrdersData"></div>
+        </section>
+
+
+        <!--<button onclick="getFilteredRecords()">Go Fish</button>
+        <div id="filteredData"></div>
+    </section>-->
+
+    <section>
+        <h2>Edit Order</h2>
+        <label for="editOrderID">Order ID to Edit:</label>
+        <input type="number" id="editOrderID" placeholder="e.g. 201">
+        <button onclick="loadOrderForEdit()">Load Order</button>
+
+        <div id="editFields" style="display: none;">
+        <label for="editCakeColor">Cake Color:</label>
+        <select id="editCakeColor">
+            <option value="White">White</option>
+            <option value="Chocolate">Chocolate</option>
+            <option value="Neurotoxin Green">Neurotoxin Green</option>
         </select>
 
+        <label for="editCakeSize">Cake Size:</label>
+        <input type="text" id="editCakeSize">
 
-        <button onclick="getFilteredRecords()">Go Fish</button>
-        <div id="filteredData"></div>
+        <label for="editCandleValue">Number of Candles:</label>
+        <input type="number" id="editCandleValue">
+
+        <label for="editAddNotes">Additional Notes:</label>
+        <input type="text" id="editAddNotes" maxlength="100">
+
+        <button onclick="saveOrderEdit()">Save Changes</button>
+        </div>
+
+        <div id="editResult"></div>
+    </section>
+
+    <section>
+        <h2>Delete Order</h2>
+        <label for="deleteOrderID">Order ID to Delete:</label>
+        <input type="number" id="deleteOrderID" placeholder="e.g. 205">
+        <button onclick="deleteOrder()">Delete</button>
+        <div id="deleteResult"></div>
     </section>
 
     <script src="script.js"></script>
