@@ -82,24 +82,103 @@ function getByLastName() {
 
 // MULTIPLE SELECTION: This will pull the 2 selected values from the drop down. Next week I would like to adjust this 
 //by adding data ordered, and order fulfilled or unfulfilled boolean so you can filter by outstanding orders.
-function getFilteredRecords() {
-    const colorChoice = document.getElementById('colorSelect').value;
-    const fillingChoice = document.getElementById('fillingSelect').value;
+//function getFilteredRecords() {
+   // const colorChoice = document.getElementById('colorSelect').value;
+   // const fillingChoice = document.getElementById('fillingSelect').value;
     
-    const dbRef = firebase.database().ref('CakeOrders');
-    dbRef.once('value', (snapshot) => {
-        const allOrders = snapshot.val();
-        const matches = {};
+   // const dbRef = firebase.database().ref('CakeOrders');
+   // dbRef.once('value', (snapshot) => {
+       // const allOrders = snapshot.val();
+       // const matches = {};
 
-        for (let key in allOrders) {
-            const order = allOrders[key];
-            if (order.cakeColor === colorChoice && order.cakeFilling === fillingChoice) {
-                matches[key] = order;
-            }
+      //  for (let key in allOrders) {
+          //  const order = allOrders[key];
+          //  if (order.cakeColor === colorChoice && order.cakeFilling === fillingChoice) {
+               // matches[key] = order;
+          //  }
+      //  }
+
+       // typeOutput('filteredData', Object.keys(matches).length ? JSON.stringify(matches, null, 2) : "Ew who would order that?");
+  //  }).catch(error => {
+      //  console.error('Error fetching data', error);
+ //   });
+//}
+
+function getAllOrders() {
+    const dbRef = firebase.database().ref('CakeOrders');
+
+    dbRef.once('value', (snapshot) => {
+        const data = snapshot.val();
+        typeOutput('allOrdersData', data ? JSON.stringify(data, null, 2) : "No orders found.");
+    }).catch((error) => {
+        typeOutput('allOrdersData', "Error fetching data: " + error.message);
+    });
+}
+
+// LOAD: fetches the specified order and fills the edit form with its current values
+function loadOrderForEdit() {
+    const orderID = document.getElementById('editOrderID').value;
+    const dbRef = firebase.database().ref('CakeOrders/' + orderID);
+
+    dbRef.once('value', (snapshot) => {
+        const order = snapshot.val();
+
+        if (!order) {
+            typeOutput('editResult', "No order found with that Order ID.");
+            document.getElementById('editFields').style.display = 'none';
+            return;
         }
 
-        typeOutput('filteredData', Object.keys(matches).length ? JSON.stringify(matches, null, 2) : "Ew who would order that?");
-    }).catch(error => {
-        console.error('Error fetching data', error);
+        // populate the edit fields with the order's current values
+        document.getElementById('editCakeColor').value = order.cakeColor || '';
+        document.getElementById('editCakeSize').value = order.cakeSize || '';
+        document.getElementById('editCandleValue').value = order.candleValue || 0;
+        document.getElementById('editAddNotes').value = order.addNotes || '';
+
+        document.getElementById('editFields').style.display = 'block';
+        typeOutput('editResult', "Order loaded. Make changes and click Save.");
+    }).catch((error) => {
+        typeOutput('editResult', "Error loading order: " + error.message);
+    });
+}
+
+// UPDATE: writes the edited values back to the same orderID, without
+// touching fields this form doesn't edit (filling, toppings, etc.)
+function saveOrderEdit() {
+    const orderID = document.getElementById('editOrderID').value;
+    const dbRef = firebase.database().ref('CakeOrders/' + orderID);
+
+    dbRef.update({
+        cakeColor: document.getElementById('editCakeColor').value,
+        cakeSize: document.getElementById('editCakeSize').value,
+        candleValue: Number(document.getElementById('editCandleValue').value),
+        addNotes: document.getElementById('editAddNotes').value
+    }).then(() => {
+        typeOutput('editResult', "Record Updated");
+    }).catch((error) => {
+        typeOutput('editResult', "Error updating record: " + error.message);
+    });
+}
+
+// DELETE: removes a specific CakeOrders record by its orderID
+function deleteOrder() {
+    const orderID = document.getElementById('deleteOrderID').value;
+    const dbRef = firebase.database().ref('CakeOrders/' + orderID);
+
+    // check the record exists before attempting to delete, so we can
+    // give an accurate message either way instead of a generic success
+    dbRef.once('value', (snapshot) => {
+        if (!snapshot.exists()) {
+            typeOutput('deleteResult', "No order found with that Order ID.");
+            return;
+        }
+
+        dbRef.remove().then(() => {
+            typeOutput('deleteResult', "Record Deleted");
+        }).catch((error) => {
+            typeOutput('deleteResult', "Error deleting record: " + error.message);
+        });
+    }).catch((error) => {
+        typeOutput('deleteResult', "Error checking record: " + error.message);
     });
 }
